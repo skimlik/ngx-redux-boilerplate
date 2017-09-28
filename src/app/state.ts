@@ -1,6 +1,5 @@
-import { State } from '@ngrx/store';
-import * as fromTest from './common/test';
+import { IGameInfo } from './common/game-info/models/game-info';
 
 export interface IState {
-    test: fromTest.ITestState;
+    gameInfo: IGameInfo;
 }

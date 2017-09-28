@@ -1,12 +1,11 @@
-import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
+import { ActionReducer, ActionReducerMap, MetaReducer, State } from '@ngrx/store';
 import { environment } from '../../environments/environment';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { IState } from '../state';
-import * as fromTest from '../common/test';
-import { createFeatureSelector, createSelector } from './selector';
+import * as fromGameInfo from '../common/game-info';
 
 export const reducers: ActionReducerMap<IState> = {
-    test: fromTest.testReducer
+    gameInfo: fromGameInfo.gameInfoReducer
 };
 
 export function logger(reducer: ActionReducer<IState>): ActionReducer<IState> {
@@ -19,12 +18,5 @@ export function logger(reducer: ActionReducer<IState>): ActionReducer<IState> {
 }
 
 export const metaReducers: MetaReducer<IState>[] = !environment.production
-? [logger, storeFreeze]
-: [];
-
-export const getTestState = createFeatureSelector<fromTest.ITestState>('test');
-
-export const getTestCounterValue = createSelector(
-    getTestState,
-    fromTest.getCounter
-);
+    ? [logger, storeFreeze]
+    : [];
