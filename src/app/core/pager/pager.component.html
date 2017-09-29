@@ -1,0 +1,15 @@
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li [ngClass]="{'disabled': i<=0}">
+            <a href="javascript:void(0)" aria-label="Previous" (click)="moveBack(i + 1)">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li *ngFor="let i of items" [ngClass]="{'active': current===i + 1}"><a href="javascript:void(0)" (click)="select(i + 1)">{{i + 1}}</a></li>
+        <li [ngClass]="{'disabled': i>=total - 1}">
+            <a href="javascript:void(0)" aria-label="Next" (click)="moveForward(i + 1)">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

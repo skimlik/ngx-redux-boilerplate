@@ -7,6 +7,14 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 
+export  interface IHttpMeta {
+    count: number;
+    page_total: number;
+    total: 49;
+    limit: 100;
+    page: 1;
+}
+
 export interface IHttpErrorMessage {
     code: string;
     message: string;
@@ -17,6 +25,7 @@ export interface IHttpErrorMessage {
 export interface IHttpReponse<T> {
     data?: T;
     status: string;
+    meta: IHttpMeta;
     error?: IHttpErrorMessage;
 }
 
@@ -66,13 +75,11 @@ export class HttpService {
         return Observable.throw(errMsg);
     }
 
-    protected parseJson<T>(text: string): T {
-        const jObject = JSON.parse(text) as T;
-        return jObject;
-    }
-
-    protected parseJsonArray<T>(text: string): T[] {
-        const jArray = JSON.parse(text) as T[];
-        return jArray;
+    public queryString(args: any): string {
+        if (!args) {
+            return '';
+        }
+        const keyValuePairs = Object.keys(args).map(m => `&${m}=${args[m]}`);
+        return `&${keyValuePairs.join('&')}`;
     }
 }

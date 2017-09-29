@@ -16,7 +16,9 @@ import { GameInfoEffects } from './common/game-info/game-info.effects';
 import { HomeComponent } from './common/home/home.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' }
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'wgtv/list', loadChildren: './wgtv/wgtv.module#WgtvModule' },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
