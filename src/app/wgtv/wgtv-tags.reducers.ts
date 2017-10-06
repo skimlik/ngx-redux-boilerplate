@@ -21,9 +21,14 @@ export function wgtvTagsReducer(state = tagsInitialState, action: tagsActions.Ac
             return Object.assign({}, <IWgtvTagsState>{
                 categories: action.payload.categories,
                 programs: action.payload.programs,
-                projects: action.payload.projects
+                projects: action.payload.projects,
+                busy: false
             });
         default:
             return state;
     }
 }
+
+export const getProjects = (state: IWgtvTagsState) => state.projects;
+export const getPrograms = (state: IWgtvTagsState) => state.programs;
+export const getCategories = (state: IWgtvTagsState) => state.categories;

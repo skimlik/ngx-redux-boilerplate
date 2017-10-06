@@ -3,9 +3,9 @@ import * as fromRoot from '../state';
 import * as fromListReducers from './wgtv.reducers';
 import * as fromTagsReducers from './wgtv-tags.reducers';
 
-import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { IWgtvListState } from './wgtv.reducers';
 import { IWgtvTagsState } from './wgtv-tags.reducers';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export interface IWgtvState {
     list: IWgtvListState;
@@ -22,14 +22,28 @@ export const reducers = {
 };
 
 export const selectWgtvState = createFeatureSelector('wgtvList');
-export const getTagState = createFeatureSelector('tags');
 
-export const getList = createSelector(
+export const getListState = createSelector(
     selectWgtvState,
     (state: IWgtvState) => state.list
 );
 
-export const getProjects = createSelector(
+export const getTagsState = createSelector(
     selectWgtvState,
-    (state: IWgtvState) => state.tags.projects
+    (state: IWgtvState) => state.tags
+);
+
+export const getProjectsState = createSelector(
+        getTagsState,
+        fromTagsReducers.getProjects
+);
+
+export const getCategoriesState = createSelector(
+    getTagsState,
+    fromTagsReducers.getCategories
+);
+
+export const getProgramsState = createSelector(
+    getTagsState,
+    fromTagsReducers.getPrograms
 );

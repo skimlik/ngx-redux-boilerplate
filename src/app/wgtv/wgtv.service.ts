@@ -24,6 +24,7 @@ export interface IWgtvSearchArgs {
     page_no?: number;
     program_id?: number;
     project_id?: number;
+    category_id?: number;
     q?: string;
     vehicle_id?: number;
     video_id?: number;

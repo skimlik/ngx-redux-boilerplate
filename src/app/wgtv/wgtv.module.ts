@@ -22,7 +22,7 @@ const routes: Routes = [
       RouterModule.forChild(routes),
 
       StoreModule.forFeature('wgtvList', reducers),
-      EffectsModule.forFeature([WgtvEffects, WgtvTagEffects]),
+      EffectsModule.forFeature([WgtvTagEffects, WgtvEffects]),
 
       CoreModule
   ],

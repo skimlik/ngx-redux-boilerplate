@@ -3,10 +3,21 @@
     <div class="row">
         <div class="col-xs-3">
             <ul class="list-group">
-                <li class="list-group-item" *ngFor="let proj of projects$ | async">{{proj.name}}</li>
+                <li class="list-group-item" *ngFor="let proj of projects$ | async" (click)="selectProject(proj)">
+                    <a href="javascript:void(0)">{{proj.name}}</a>
+                </li>
+            </ul>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let cat of categories$ | async" (click)="selectCategory(cat)">
+                    <a href="javascript:void(0)">{{cat.name}}</a>
+                </li>
+            </ul>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let prog of programs$ | async" (click)="selectProgram(prog)">
+                    <a href="javascript:void(0)">{{prog.name}}</a>
+                </li>
             </ul>
         </div>
-        <pager-component [total]="(list$ | async).pages" (onCurrent)="selectPage($event)"></pager-component>
         <div class="col-xs-9">
             <div *ngFor="let item of (list$ | async).list">
                 <div class="media">
@@ -18,12 +29,16 @@
                     <div class="media-body">
                         <h4 class="media-heading">{{item.title}}</h4>
                         {{item.description}}
-                        <p><a target="_blank" href="{{item.video_url}}">{{item.video_id}}</a></p>
+                        <p>
+                            <a target="_blank" href="{{item.video_url}}">{{item.video_id}}</a>
+                        </p>
                     </div>
                 </div>
-                <p></p>
+                <p>
+                </p>
             </div>
-
+            <span *ngIf="state.list.length<=0" class="alert alert-warning">Нет данных удовлетворяющих выбранным критериям</span>
+            <pager-component [total]="(list$ | async).pages" (onCurrent)="selectPage($event)"></pager-component>
             Total: {{(list$ | async).total}}
         </div>
     </div>

@@ -7,6 +7,7 @@ export interface IWgtvListState {
     pageNo: number;
     total: number;
     search: IWgtvSearchArgs;
+    busy: boolean;
     list: IWgtvList[];
 }
 
@@ -14,6 +15,7 @@ export const initialState: IWgtvListState = {
     pageNo: 1,
     pages: 1,
     total: 0,
+    busy: false,
     list: [],
     search: {}
 };
@@ -23,7 +25,7 @@ export function wgtvListReducer(state = initialState, action: fromWgtvActions.Ac
         case fromWgtvActions.WGTV_LIST_GET:
             return {
                 ...state,
-                search: action.payload
+                search: action.payload,
             };
         case fromWgtvActions.WGTV_LIST_FETCH:
             return {
