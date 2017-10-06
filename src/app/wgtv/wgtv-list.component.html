@@ -23,24 +23,29 @@
                 <div *ngFor="let item of (list$ | async).list">
                     <div class="media">
                         <div class="media-left">
-                            <a href="#">
+                            <a href="{{item.video_url}}">
                                 <img class="media-object" [src]="item.thumbnails.default.url" [alt]="item.title">
                             </a>
                         </div>
                         <div class="media-body">
                             <h4 class="media-heading">{{item.title}}</h4>
-                            {{item.description}}
                             <p>
+                                <span class="badge">{{item.published_at | unixdate | date}}</span>
                                 <a target="_blank" href="{{item.video_url}}">{{item.video_id}}</a>
                             </p>
+                            <p>{{item.description}}</p>
                         </div>
                     </div>
                     <p>
                     </p>
                 </div>
-                <span *ngIf="state.list.length<=0 && !state?.busy" class="alert alert-warning">Нет данных удовлетворяющих выбранным критериям</span>
+                <span *ngIf="state.list.length<=0 && !state?.busy" class="alert alert-warning">
+                    Нет данных удовлетворяющих выбранным критериям
+                </span>
                 <pager-component [total]="(list$ | async).pages" (onCurrent)="selectPage($event)"></pager-component>
-                Total: {{(list$ | async).total}}
+                <p>
+                    <span class="badge">Total: {{(list$ | async).total}}</span>
+                </p>
             </div>
             <ng-template #busy>
                 <spinner [busy]="true"></spinner>

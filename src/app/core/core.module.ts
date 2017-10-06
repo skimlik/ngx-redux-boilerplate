@@ -4,10 +4,12 @@ import { HttpService } from './http/http.service';
 import { CommonModule } from '@angular/common';
 import { PagerComponent } from './pager/index';
 import { SpinnerComponent } from './spinner.component';
+import { UnixDatePipe } from './unix-date.pipe';
 
 const toExport = [
     PagerComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    UnixDatePipe
 ];
 
 @NgModule({
