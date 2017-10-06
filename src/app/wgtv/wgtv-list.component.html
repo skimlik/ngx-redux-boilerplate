@@ -19,27 +19,32 @@
             </ul>
         </div>
         <div class="col-xs-9">
-            <div *ngFor="let item of (list$ | async).list">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object" [src]="item.thumbnails.default.url" [alt]="item.title">
-                        </a>
+            <div *ngIf="!(list$ | async).busy;else busy">
+                <div *ngFor="let item of (list$ | async).list">
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" [src]="item.thumbnails.default.url" [alt]="item.title">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{item.title}}</h4>
+                            {{item.description}}
+                            <p>
+                                <a target="_blank" href="{{item.video_url}}">{{item.video_id}}</a>
+                            </p>
+                        </div>
                     </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">{{item.title}}</h4>
-                        {{item.description}}
-                        <p>
-                            <a target="_blank" href="{{item.video_url}}">{{item.video_id}}</a>
-                        </p>
-                    </div>
+                    <p>
+                    </p>
                 </div>
-                <p>
-                </p>
+                <span *ngIf="state.list.length<=0 && !state?.busy" class="alert alert-warning">Нет данных удовлетворяющих выбранным критериям</span>
+                <pager-component [total]="(list$ | async).pages" (onCurrent)="selectPage($event)"></pager-component>
+                Total: {{(list$ | async).total}}
             </div>
-            <span *ngIf="state.list.length<=0" class="alert alert-warning">Нет данных удовлетворяющих выбранным критериям</span>
-            <pager-component [total]="(list$ | async).pages" (onCurrent)="selectPage($event)"></pager-component>
-            Total: {{(list$ | async).total}}
+            <ng-template #busy>
+                <spinner [busy]="true"></spinner>
+            </ng-template>
         </div>
     </div>
 </div>

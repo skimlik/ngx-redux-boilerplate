@@ -26,6 +26,7 @@ export function wgtvListReducer(state = initialState, action: fromWgtvActions.Ac
             return {
                 ...state,
                 search: action.payload,
+                busy: true
             };
         case fromWgtvActions.WGTV_LIST_FETCH:
             return {
@@ -33,7 +34,8 @@ export function wgtvListReducer(state = initialState, action: fromWgtvActions.Ac
                 pageNo: action.payload.meta.page,
                 pages: action.payload.meta.page_total,
                 total: action.payload.meta.count,
-                list: action.payload.data
+                list: action.payload.data,
+                busy: false
             };
         default:
             return state;

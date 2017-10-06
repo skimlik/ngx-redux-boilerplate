@@ -3,9 +3,11 @@ import { HttpModule } from '@angular/http';
 import { HttpService } from './http/http.service';
 import { CommonModule } from '@angular/common';
 import { PagerComponent } from './pager/index';
+import { SpinnerComponent } from './spinner.component';
 
 const toExport = [
-    PagerComponent
+    PagerComponent,
+    SpinnerComponent
 ];
 
 @NgModule({
