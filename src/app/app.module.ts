@@ -13,34 +13,39 @@ import { NavComponent } from './common/nav';
 import { CoreModule } from './core/core.module';
 import { GameInfoService } from './common/game-info';
 import { GameInfoEffects } from './common/game-info/game-info.effects';
+
 import { HomeComponent } from './common/home/home.component';
+import { NotFoundComponent} from './common/home/error-pages/not-found.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'wgtv/list', loadChildren: './wgtv/wgtv.module#WgtvModule' },
-  { path: '**', redirectTo: '' }
+    { path: '', component: HomeComponent, pathMatch: 'full' },
+    { path: '404', component: NotFoundComponent },
+    { path: 'wgtv/list', loadChildren: './wgtv/wgtv.module#WgtvModule' },
+    { path: '**', redirectTo: '404' }
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot(routes),
+    declarations: [
+        AppComponent,
+        NavComponent,
+        HomeComponent,
+        NotFoundComponent
+    ],
+    imports: [
+        BrowserModule,
+        RouterModule.forRoot(routes),
 
-    StoreModule.forRoot(reducers, {metaReducers}),
-    EffectsModule.forRoot([GameInfoEffects]),
+        StoreModule.forRoot(reducers, { metaReducers }),
+        EffectsModule.forRoot([GameInfoEffects]),
 
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+        !environment.production ? StoreDevtoolsModule.instrument() : [],
 
-    CoreModule.forRoot(),
-  ],
-  providers: [
-    GameInfoService
-  ],
-  bootstrap: [AppComponent]
+        CoreModule.forRoot(),
+    ],
+    providers: [
+        GameInfoService
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
